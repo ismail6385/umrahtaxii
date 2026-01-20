@@ -1,0 +1,54 @@
+[
+  {
+    "id": "ai-1768426610340",
+    "originId": "jeddah-airport",
+    "destinationId": "makkah-city",
+    "distanceKm": 105,
+    "durationMins": 70,
+    "slug": "jeddah-airport-to-pullman-zamzam-taxi",
+    "description": "Auto-generated premium transfer description for Jeddah Airport to Pullman Zamzam Taxi. Optimized for high CTR.",
+    "startingPrice": 210,
+    "type": "airport",
+    "mainKeyword": "Jeddah Airport to Pullman Zamzam Taxi",
+    "availableVehicles": [
+      "GMC Yukon",
+      "Toyota Hiace"
+    ],
+    "nearbyHotels": [
+      "Hilton",
+      "Swissotel"
+    ],
+    "ziyaratStops": [
+      "Ayesha Mosque"
+    ],
+    "pilgrimOrigins": [
+      "Global"
+    ]
+  },
+  {
+    "id": "ai-1768426615719",
+    "originId": "jeddah-airport",
+    "destinationId": "makkah-city",
+    "distanceKm": 105,
+    "durationMins": 70,
+    "slug": "jeddah-to-madinah-taxi-price",
+    "description": "Auto-generated premium transfer description for Jeddah to Madinah Taxi Price. Optimized for high CTR.",
+    "startingPrice": 210,
+    "type": "airport",
+    "mainKeyword": "Jeddah to Madinah Taxi Price",
+    "availableVehicles": [
+      "GMC Yukon",
+      "Toyota Hiace"
+    ],
+    "nearbyHotels": [
+      "Hilton",
+      "Swissotel"
+    ],
+    "ziyaratStops": [
+      "Ayesha Mosque"
+    ],
+    "pilgrimOrigins": [
+      "Global"
+    ]
+  }
+]

@@ -1,0 +1,60 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "Privacy Policy | Umrah Taxi Saudi Arabia";
+const description =
+    "Our privacy policy outlines how we collect, use, and protect your personal information when you use our Umrah Taxi services.";
+---
+
+<Layout title={title} description={description}>
+    <section class="pt-32 pb-20 bg-black min-h-screen">
+        <div class="container max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold text-white mb-8">Privacy Policy</h1>
+
+            <div class="prose prose-invert max-w-none text-gray-300">
+                <p>Last Updated: {new Date().toLocaleDateString()}</p>
+
+                <h3>1. Information We Collect</h3>
+                <p>
+                    We collect information you provide directly to us when
+                    booking a ride, including your name, contact details
+                    (WhatsApp number), flight information, and pickup/drop-off
+                    locations.
+                </p>
+
+                <h3>2. How We Use Your Information</h3>
+                <p>We use the information we collect to:</p>
+                <ul>
+                    <li>Provide, maintain, and improve our taxi services.</li>
+                    <li>Process your booking and send confirmation.</li>
+                    <li>
+                        Communicate with you regarding updates, flight delays,
+                        or driver details.
+                    </li>
+                </ul>
+
+                <h3>3. Data Security</h3>
+                <p>
+                    We implement appropriate technical and organizational
+                    measures to protect your personal data against unauthorized
+                    access, alteration, disclosure, or destruction.
+                </p>
+
+                <h3>4. Sharing of Information</h3>
+                <p>
+                    We do not sell your personal information. We may share your
+                    details with our drivers strictly for the purpose of
+                    fulfilling your ride request.
+                </p>
+
+                <h3>5. Contact Us</h3>
+                <p>
+                    If you have any questions about this Privacy Policy, please
+                    contact us at <a href="/contact" class="text-gold"
+                        >booking@umrahtaxi.site</a
+                    >.
+                </p>
+            </div>
+        </div>
+    </section>
+</Layout>

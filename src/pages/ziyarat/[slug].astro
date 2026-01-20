@@ -1,0 +1,148 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { BookingWidget } from "../../components/BookingWidget";
+import AutoFAQ from "../../components/AutoFAQ.astro";
+import { ziyaratTours, locations, vehicles } from "../../data/knowledge-graph";
+import type { ZiyaratTour } from "../../data/types";
+
+export function getStaticPaths() {
+  return ziyaratTours.map((tour) => ({
+    params: { slug: tour.slug },
+    props: { tour },
+  }));
+}
+
+interface Props {
+  tour: ZiyaratTour;
+}
+
+const { tour } = Astro.props;
+
+const title = `${tour.city} Ziyarat Taxi Tour | Umrah Taxi`;
+const description = `Explore the holy places of ${tour.city} with Umrah Taxi. Our ziyarat tours are designed for ${tour.idealFor}.`;
+
+const faqQuestions = [
+  `How long is the ${tour.city} Ziyarat Tour?`,
+  `Can we pray at the Ziyarat sites?`,
+  `Is this a private tour?`,
+  `Do you pick up from hotels in ${tour.city}?`,
+  `Is the driver knowledgeable about the sites?`,
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "TouristTrip",
+  name: `${tour.city} Ziyarat Tour`,
+  description: description,
+  provider: {
+    "@type": "TravelAgency",
+    name: "Umrah Taxi",
+  },
+  itinerary: {
+    "@type": "ItemList",
+    itemListElement: tour.spots.map((spot, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: spot,
+    })),
+  },
+};
+---
+
+<Layout title={title} description={description} schema={schema}>
+  <section class="relative bg-black pt-32 pb-20 overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-40">
+      <img
+        src="/images/hero.png"
+        class="w-full h-full object-cover"
+        alt="Background"
+      />
+    </div>
+
+    <div
+      class="container relative z-10 grid md:grid-cols-2 gap-12 items-center"
+    >
+      <div class="animate-fade-in">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white">
+          {tour.city} Ziyarat Taxi Tour
+        </h1>
+        <p class="text-xl text-gray-300 mb-8">
+          Explore the holy places of {tour.city} with Umrah Taxi. Our ziyarat tours
+          are designed for
+          <strong>{tour.idealFor}</strong> and include comfortable vehicles with experienced
+          drivers.
+        </p>
+      </div>
+
+      <div class="animate-fade-in" style="animation-delay: 0.2s">
+        <BookingWidget locations={locations} vehicles={vehicles} client:load />
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-black text-white">
+    <div class="container max-w-4xl mx-auto space-y-12">
+      <!-- Ziyarat Places -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-gold">
+          Ziyarat Places in {tour.city}
+        </h2>
+        <p class="text-gray-300 mb-6">
+          We cover all the significant historical and spiritual sites:
+        </p>
+        <ul class="grid md:grid-cols-2 gap-3">
+          {
+            tour.spots.map((p) => (
+              <li class="flex items-center gap-2 text-gray-300">
+                <span class="text-emerald">✓</span> {p}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Tour Duration -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-gold">Tour Duration</h2>
+        <p class="text-gray-300 leading-relaxed text-lg">
+          The complete ziyarat tour takes approximately <strong
+            >{tour.durationHours}–{tour.durationHours + 1} hours</strong
+          >, giving you ample time to reflect and pray at each site.
+        </p>
+      </div>
+
+      <!-- Available Vehicles -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-gold">Available Vehicles</h2>
+        <ul class="grid md:grid-cols-2 gap-3">
+          {
+            tour.vehicleTypes?.map((v) => (
+              <li class="flex items-center gap-2 text-gray-300">
+                <span class="text-emerald">✓</span> {v} Ziyarat Taxi
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Auto FAQ -->
+      <div>
+        <AutoFAQ route={`${tour.city} Ziyarat`} questions={faqQuestions} />
+      </div>
+
+      <!-- Bottom Booking Widget -->
+      <div class="text-center pt-8 border-t border-white/10">
+        <h2 class="text-3xl font-bold mb-6 text-white">
+          Book {tour.city} Ziyarat Taxi
+        </h2>
+        <div class="max-w-md mx-auto">
+          <BookingWidget
+            locations={locations}
+            vehicles={vehicles}
+            client:load
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

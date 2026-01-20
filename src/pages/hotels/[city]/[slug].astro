@@ -1,0 +1,175 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { ShortBookingForm } from "../../../components/ShortBookingForm";
+import { hotels, locations, vehicles } from "../../../data/knowledge-graph";
+import type { Hotel } from "../../../data/types";
+
+export function getStaticPaths() {
+  return hotels.map((hotel) => ({
+    params: { city: hotel.city.toLowerCase(), slug: hotel.slug },
+    props: { hotel },
+  }));
+}
+
+interface Props {
+  hotel: Hotel;
+}
+
+const { hotel } = Astro.props;
+
+const title = `${hotel.name} Taxi Service | Umrah Taxi`;
+const description = `Book your private Umrah Taxi to ${hotel.name} in ${hotel.city}. Direct airport and intercity transfers.`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Hotel",
+  name: hotel.name,
+  description: description,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: hotel.city,
+    addressCountry: "SA",
+    streetAddress: `Near ${hotel.near}`,
+  },
+};
+---
+
+<Layout title={title} description={description} schema={schema}>
+  <section class="relative bg-black pt-32 pb-20 overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-40">
+      <img
+        src="/images/hero.png"
+        class="w-full h-full object-cover"
+        alt="Background"
+      />
+    </div>
+
+    <div
+      class="container relative z-10 grid md:grid-cols-2 gap-12 items-center"
+    >
+      <div class="animate-fade-in">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white">
+          {hotel.name} Taxi Service
+        </h1>
+        <p class="text-xl text-gray-300 mb-8">
+          Book your private Umrah Taxi to <strong>{hotel.name}</strong> in {
+            hotel.city
+          }, located near {hotel.near}. We provide direct airport and intercity
+          transfers for Umrah and Hajj pilgrims.
+        </p>
+      </div>
+
+      <div class="animate-fade-in" style="animation-delay: 0.2s">
+        <ShortBookingForm
+          locations={locations}
+          vehicles={vehicles}
+          client:load
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-black text-white">
+    <div class="container max-w-4xl mx-auto space-y-12">
+      <!-- Airport to Hotel Section -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-gold">
+          {hotel.airport} to {hotel.name} Taxi
+        </h2>
+        <p class="text-gray-300 leading-relaxed">
+          The distance from {hotel.airport} to {hotel.name} is approximately {
+            hotel.distance
+          } and takes around {hotel.time}. Our professional drivers ensure a
+          peaceful and comfortable Umrah journey.
+        </p>
+      </div>
+
+      <!-- Popular Routes -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-gold">
+          Popular Routes for {hotel.name}
+        </h2>
+        <ul class="grid md:grid-cols-2 gap-3">
+          {
+            hotel.popularRoutes?.map((r) => (
+              <li class="flex items-center gap-2 text-gray-300">
+                <span class="text-emerald">✓</span> {r} Taxi
+              </li>
+            )) || (
+              <li class="text-gray-400">Custom routes available on request.</li>
+            )
+          }
+        </ul>
+      </div>
+
+      <!-- Why Choose Us -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-gold">
+          Why pilgrims choose Umrah Taxi for {hotel.name}
+        </h2>
+        <p class="text-gray-300 leading-relaxed">
+          Umrah Taxi specializes in hotel-based transfers. Whether you are
+          arriving for Tawaf, going for Ziyarat, or traveling to Madinah, we
+          provide reliable and Shariah-friendly transport.
+        </p>
+      </div>
+
+      <!-- FAQs -->
+      <div class="pt-12 border-t border-white/10">
+        <h2 class="text-3xl font-bold mb-8 text-gold text-center">
+          Frequently Asked Questions
+        </h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-2">
+              Do you pick up from {hotel.airport}?
+            </h3>
+            <p class="text-gray-400">
+              Yes, we provide Meet & Greet service at {hotel.airport} and drop you
+              directly at {hotel.name}.
+            </p>
+          </div>
+          <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-2">
+              How far is {hotel.name} from Haram?
+            </h3>
+            <p class="text-gray-400">
+              This hotel is located near {hotel.near}. The actual travel time
+              depends on traffic, but our drivers know the best routes.
+            </p>
+          </div>
+          <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-2">
+              Can we book a return trip?
+            </h3>
+            <p class="text-gray-400">
+              Yes, you can book your return transfer to the airport or any other
+              city (Madinah/Taif) instantly.
+            </p>
+          </div>
+          <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-2">Is payment fixed?</h3>
+            <p class="text-gray-400">
+              The price we quote is for the vehicle (private taxi). No
+              per-person charges.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Related Links -->
+      <!-- <div class="pt-12 border-t border-white/10">
+              <h3 class="text-xl font-bold mb-4 text-gold">Related Umrah Taxi Services</h3>
+              <ul class="flex flex-wrap gap-4 text-sm">
+                  {import('../../../data/related-links.json').then(m => m[hotel.slug] || []).then(links => links.map((link: any) => (
+                      <li>
+                          <a href={link.url} class="text-gray-400 hover:text-gold transition-colors border-b border-transparent hover:border-gold">
+                              {link.title}
+                          </a>
+                      </li>
+                  )))}
+              </ul>
+          </div> -->
+    </div>
+  </section>
+</Layout>

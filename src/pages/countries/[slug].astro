@@ -1,0 +1,165 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { ShortBookingForm } from "../../components/ShortBookingForm";
+import { countryPages, locations, vehicles } from "../../data/knowledge-graph";
+import type { CountryPage } from "../../data/types";
+
+export function getStaticPaths() {
+  return countryPages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
+  }));
+}
+
+interface Props {
+  page: CountryPage;
+}
+
+const { page } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: `${page.country} Umrah Taxi Service`,
+  description: page.description,
+  areaServed: page.country,
+};
+---
+
+<Layout
+  title={`${page.country} Umrah Taxi Service | Umrah Taxi`}
+  description={page.description}
+  schema={schema}
+>
+  <section class="relative bg-black pt-32 pb-20 overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-40">
+      <img
+        src="/images/hero.png"
+        class="w-full h-full object-cover"
+        alt="Background"
+      />
+    </div>
+
+    <div
+      class="container relative z-10 grid md:grid-cols-2 gap-12 items-center"
+    >
+      <div class="animate-fade-in">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white">
+          {page.country} Umrah Taxi Service
+        </h1>
+        <p class="text-xl text-gray-300 mb-8">
+          We provide dedicated Umrah taxi services for <strong
+            >{page.pilgrims}</strong
+          >. From {page.airports.join(" & ")} airports to Makkah, Madinah, and Taif,
+          Umrah Taxi ensures a safe, private, and smooth spiritual journey.
+        </p>
+      </div>
+
+      <div class="animate-fade-in" style="animation-delay: 0.2s">
+        <ShortBookingForm
+          locations={locations}
+          vehicles={vehicles}
+          client:load
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-black text-white">
+    <div class="container max-w-4xl mx-auto space-y-12">
+      <!-- Main Route -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-gold">
+          {page.mainRoute} for {page.country} Pilgrims
+        </h2>
+        <p class="text-gray-300 leading-relaxed">
+          Most pilgrims from {page.country} arrive via {page.airports[0]}. Our
+          drivers are experienced with Ihram rules, luggage needs, and family
+          groups.
+        </p>
+      </div>
+
+      <!-- Secondary Route -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-gold">
+          {page.secondaryRoute} Transfers
+        </h2>
+        <p class="text-gray-300 leading-relaxed">
+          Travel comfortably from Makkah to Madinah in clean, air-conditioned
+          vehicles with Arabic-speaking and {
+            page.language.split("+")[0]
+          }-friendly drivers.
+        </p>
+      </div>
+
+      <!-- Why Choose Us -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-gold">
+          Why {page.country} Pilgrims Choose Umrah Taxi
+        </h2>
+        <ul class="grid md:grid-cols-2 gap-3">
+          <li class="flex items-center gap-2 text-gray-300">
+            <span class="text-emerald">✓</span> Support in {page.language}
+          </li>
+          <li class="flex items-center gap-2 text-gray-300">
+            <span class="text-emerald">✓</span> Easy payments in {page.currency}
+          </li>
+          <li class="flex items-center gap-2 text-gray-300">
+            <span class="text-emerald">✓</span> Private family vehicles
+          </li>
+          <li class="flex items-center gap-2 text-gray-300">
+            <span class="text-emerald">✓</span> Haram-friendly drivers
+          </li>
+        </ul>
+      </div>
+
+      <!-- Bottom Booking Widget -->
+      <!-- FAQs -->
+      <div class="pt-12 border-t border-white/10">
+        <h2 class="text-3xl font-bold mb-8 text-gold text-center">
+          Frequently Asked Questions
+        </h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-2">
+              Can I pay in {page.currency}?
+            </h3>
+            <p class="text-gray-400">
+              Yes, while our official rates are in SAR, we accept {
+                page.currency
+              } equivalent based on daily exchange rates. You can also pay via card
+              or cash.
+            </p>
+          </div>
+          <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-2">
+              Do drivers speak {page.language}?
+            </h3>
+            <p class="text-gray-400">
+              Our drivers are multi-lingual. For {page.country} pilgrims, we assign
+              drivers who can communicate effectively in {page.language} or English.
+            </p>
+          </div>
+          <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-2">
+              Is the ride private?
+            </h3>
+            <p class="text-gray-400">
+              Absolutely. This is a VIP Private Chauffeur service. You get the
+              whole vehicle for yourself and your family. No sharing.
+            </p>
+          </div>
+          <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-2">
+              How do I book from {page.country}?
+            </h3>
+            <p class="text-gray-400">
+              You can book online using the form above or simply WhatsApp us. We
+              will confirm your ride instantly.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

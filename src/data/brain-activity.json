@@ -1,0 +1,81 @@
+{
+    "systemStatus": "online",
+    "lastUpdate": "Just now",
+    "radar": [
+        {
+            "signal": "Trending Route",
+            "value": "Jeddah → Hilton Makkah",
+            "type": "route",
+            "trend": "up"
+        },
+        {
+            "signal": "Top Country",
+            "value": "Pakistan",
+            "type": "country",
+            "trend": "stable"
+        },
+        {
+            "signal": "Hot Hotel",
+            "value": "Pullman Zamzam",
+            "type": "hotel",
+            "trend": "up"
+        },
+        {
+            "signal": "Ziyarat Trend",
+            "value": "Madinah Ziyarat",
+            "type": "ziyarat",
+            "trend": "up"
+        },
+        {
+            "signal": "Rising Search",
+            "value": "Makkah to Madinah Taxi",
+            "type": "search",
+            "trend": "rocket"
+        }
+    ],
+    "decisions": [
+        {
+            "action": "Boosted Page",
+            "detail": "Pakistan Umrah Taxi (High Intent)",
+            "time": "2 mins ago",
+            "impact": "High"
+        },
+        {
+            "action": "Added Hotel",
+            "detail": "Hilton Makkah added to Homepage",
+            "time": "5 mins ago",
+            "impact": "Medium"
+        },
+        {
+            "action": "Link Injection",
+            "detail": "Connected User to Makkah Ziyarat",
+            "time": "12 mins ago",
+            "impact": "Low"
+        },
+        {
+            "action": "Content Gen",
+            "detail": "Created 'Jeddah to Madinah Price' guide",
+            "time": "1 hour ago",
+            "impact": "High"
+        }
+    ],
+    "revenue": {
+        "topRoute": "Jeddah -> Makkah",
+        "topHotel": "Clock Tower",
+        "highValueCountry": "United Kingdom"
+    },
+    "seo": {
+        "google": {
+            "rank": "1",
+            "status": "climbing"
+        },
+        "chatgpt": {
+            "status": "mentioned",
+            "sentiment": "positive"
+        },
+        "bing": {
+            "indexed": "210",
+            "status": "healthy"
+        }
+    }
+}

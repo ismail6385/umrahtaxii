@@ -1,0 +1,89 @@
+---
+// Static import is more stable for build
+import reviewsData from "../data/reviews-data.json";
+
+const { entitySlug } = Astro.props;
+
+const reviews = reviewsData || [];
+
+// Filter reviews for this entity
+const relevantReviews = reviews.filter(
+    (r: any) => r.tags && r.tags.includes(entitySlug),
+);
+
+// If no specific reviews, maybe show generic ones or hide
+if (relevantReviews.length === 0) {
+    // Return null (conditional rendering in parent usually handles this, but Astro component returns fragment)
+    // To properly return nothing:
+}
+---
+
+{
+    relevantReviews.length > 0 && (
+        <section class="py-12 border-t border-white/10">
+            <div class="flex items-center gap-3 mb-6">
+                <h2 class="text-2xl font-bold text-white">
+                    <span class="text-gold">★</span> Recent Reviews
+                </h2>
+                <span class="text-sm text-gray-400">Verified Passengers</span>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+                {relevantReviews.map((r: any) => (
+                    <div
+                        class="bg-gray-900/50 p-6 rounded-xl border border-white/5 relative"
+                        itemprop="review"
+                        itemscope
+                        itemtype="https://schema.org/Review"
+                    >
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center text-gold font-bold text-sm">
+                                    {r.user.charAt(0)}
+                                </div>
+                                <div>
+                                    <div
+                                        class="font-bold text-white text-sm"
+                                        itemprop="author"
+                                        itemscope
+                                        itemtype="https://schema.org/Person"
+                                    >
+                                        <span itemprop="name">{r.user}</span>
+                                    </div>
+                                    <div
+                                        class="text-xs text-gray-400"
+                                        itemprop="datePublished"
+                                    >
+                                        {r.date}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex text-gold text-xs">★★★★★</div>
+                        </div>
+
+                        <p
+                            class="text-gray-300 text-sm italic relative z-10"
+                            itemprop="reviewBody"
+                        >
+                            "{r.text}"
+                        </p>
+
+                        <div class="absolute top-4 right-4 text-6xl text-white/5 font-serif pointer-events-none">
+                            "
+                        </div>
+
+                        <div
+                            itemprop="reviewRating"
+                            itemscope
+                            itemtype="https://schema.org/Rating"
+                            class="hidden"
+                        >
+                            <meta itemprop="ratingValue" content="5" />
+                            <meta itemprop="bestRating" content="5" />
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </section>
+    )
+}

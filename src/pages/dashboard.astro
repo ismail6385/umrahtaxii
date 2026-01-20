@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import BrainDashboardComponent from '../components/BrainDashboard.jsx';
+import BookingsPanelComponent from '../components/BookingsPanel.jsx';
+
+// Import initial state
+import brainData from '../data/brain-activity.json';
+
+const title = "Website Brain | AI Dashboard";
+const description = "Real-time control center for Umrah Taxi AI Autonomous System.";
+---
+
+<Layout title={title} description={description}>
+    <script>
+        import { supabase } from '../lib/supabase';
+        
+        // Check auth on page load
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (!session) {
+                window.location.href = '/admin/login';
+            }
+        });
+    </script>
+    
+    <div class="bg-black min-h-screen pt-24 pb-12">
+        <div class="container mx-auto px-4 max-w-7xl space-y-8">
+            <BrainDashboardComponent initialData={brainData} client:only="preact" />
+            
+            <!-- Bookings Section -->
+            <BookingsPanelComponent client:only="preact" />
+        </div>
+    </div>
+</Layout>

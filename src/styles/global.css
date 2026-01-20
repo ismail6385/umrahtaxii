@@ -1,0 +1,73 @@
+/* Global Design System - Umrah Taxi Premium */
+@import "tailwindcss";
+
+@theme {
+  --color-gold: #D4AF37;
+  --color-gold-light: #F4E5B0;
+  --color-gold-dark: #AA8C2C;
+
+  --color-black: #0A0A0A;
+  --color-black-rich: #0A0A0A;
+  --color-black-light: #1A1A1A;
+
+  --color-emerald: #10B981;
+  --color-emerald-dark: #059669;
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+
+  --animate-fade-in: fadeIn 0.8s ease-out forwards;
+}
+
+@layer base {
+  :root {
+    --header-height: 80px;
+  }
+
+  html {
+    background-color: var(--color-black-rich);
+    font-family: var(--font-sans);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    color: white;
+    line-height: 1.2;
+  }
+
+  body {
+    color: white;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-semibold transition-all duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-br from-gold to-gold-dark text-black shadow-lg shadow-gold/20 hover:shadow-gold/40 hover:-translate-y-0.5;
+  }
+
+  .bg-glass {
+    @apply bg-black/70 backdrop-blur-xl border border-white/10;
+  }
+
+  .container {
+    @apply max-w-7xl mx-auto px-6;
+  }
+
+  .section {
+    @apply py-20;
+  }
+
+  .text-gold {
+    color: var(--color-gold);
+  }
+}

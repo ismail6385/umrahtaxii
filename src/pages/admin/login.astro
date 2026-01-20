@@ -1,0 +1,111 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "Admin Login | Umrah Taxi";
+const description = "Secure admin access";
+---
+
+<Layout title={title} description={description}>
+    <div class="bg-black min-h-screen flex items-center justify-center pt-24 pb-12">
+        <div class="container mx-auto px-4 max-w-md">
+            <div class="bg-gray-900/50 border border-white/10 rounded-xl p-8 backdrop-blur-md">
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold text-white mb-2">
+                        🔐 Admin Login
+                    </h1>
+                    <p class="text-gray-400 text-sm">Umrah Taxi Dashboard Access</p>
+                </div>
+
+                <form id="loginForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm text-gray-300 mb-2">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            required
+                            class="w-full bg-black/50 border border-gray-600 text-white rounded-lg p-3 focus:border-gold focus:outline-none transition-colors"
+                            placeholder="umrahtaxi22@gmail.com"
+                        />
+                    </div>
+
+                    <div>
+                        <label class="block text-sm text-gray-300 mb-2">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            required
+                            class="w-full bg-black/50 border border-gray-600 text-white rounded-lg p-3 focus:border-gold focus:outline-none transition-colors"
+                            placeholder="••••••••"
+                        />
+                    </div>
+
+                    <div id="errorMessage" class="hidden text-red-400 text-sm text-center p-3 bg-red-500/10 rounded"></div>
+
+                    <button
+                        type="submit"
+                        id="submitBtn"
+                        class="w-full bg-gold hover:bg-gold/90 text-black font-bold py-3 rounded-lg transition-colors"
+                    >
+                        Login with Supabase
+                    </button>
+                </form>
+
+                <p class="text-xs text-center text-gray-500 mt-6">
+                    Powered by Supabase Auth
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        import { supabase } from '../../lib/supabase';
+
+        const form = document.getElementById('loginForm') as HTMLFormElement;
+        const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement;
+        const errorMessage = document.getElementById('errorMessage') as HTMLDivElement;
+
+        // Test Supabase connection on page load
+        console.log('Supabase client initialized:', supabase);
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = (document.getElementById('email') as HTMLInputElement).value;
+            const password = (document.getElementById('password') as HTMLInputElement).value;
+
+            console.log('Attempting login for:', email);
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Authenticating...';
+            errorMessage.classList.add('hidden');
+
+            try {
+                const { data, error } = await supabase.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+                console.log('Login response:', { data, error });
+
+                if (error) {
+                    console.error('Login error:', error);
+                    errorMessage.textContent = error.message || 'Login failed';
+                    errorMessage.classList.remove('hidden');
+                } else if (data?.session) {
+                    console.log('Login successful, redirecting...');
+                    window.location.href = '/dashboard';
+                } else {
+                    errorMessage.textContent = 'Login failed - no session created';
+                    errorMessage.classList.remove('hidden');
+                }
+            } catch (error: any) {
+                console.error('Catch error:', error);
+                errorMessage.textContent = 'Network error: ' + (error?.message || 'Unknown error');
+                errorMessage.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Login with Supabase';
+            }
+        });
+    </script>
+</Layout>

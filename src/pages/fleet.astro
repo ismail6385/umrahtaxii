@@ -1,0 +1,151 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { vehicles } from '../data/knowledge-graph';
+
+
+const title = "Our Premium Fleet | Umrah Taxi Saudi Arabia";
+const description = "Explore our diverse fleet of luxury and comfortable vehicles including GMC Yukon, Toyota Camry, Hiace, and celestial buses. Perfect for individuals, families, and groups.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Umrah Taxi Fleet",
+  "description": description,
+  "itemListElement": vehicles.map((vehicle, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "item": {
+      "@type": "Vehicle",
+      "name": vehicle.name,
+      "image": `https://umrahtaxi.site${vehicle.image}`,
+      "description": `Capacity: ${vehicle.capacity_pax} Passengers, ${vehicle.capacity_luggage} Luggage. ${vehicle.features.join('. ')}`,
+      "vehicleConfiguration": vehicle.type,
+      "numberOfPassengers": vehicle.capacity_pax
+    }
+  }))
+};
+---
+
+<Layout title={title} description={description} schema={schema}>
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 bg-black min-h-[50vh] flex items-center overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-50">
+      <img src="/images/hero.png" alt="Luxury Fleet" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+    </div>
+
+    <div class="container relative z-10 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in">
+        Our Premium <span class="text-gold">Fleet</span>
+      </h1>
+      <p class="text-xl text-gray-300 max-w-2xl mx-auto mb-8 animate-fade-in" style="animation-delay: 0.1s">
+        Experience spiritual journeys in absolute comfort. From luxury sedans to spacious buses, we have the perfect vehicle for your group.
+      </p>
+    </div>
+  </section>
+
+  <!-- Fleet Listing -->
+  <section class="py-20 bg-gray-900">
+    <div class="container">
+      <div class="space-y-12">
+        {vehicles.map((vehicle, index) => (
+          <div class={`flex flex-col md:flex-row gap-8 items-center bg-black/40 rounded-3xl overflow-hidden border border-white/5 hover:border-gold/30 transition-all duration-300 ${index % 2 === 1 ? 'md:flex-row-reverse' : ''}`} id={vehicle.id}>
+            
+            <!-- Image Side -->
+            <div class="w-full md:w-1/2 aspect-video bg-black/50 relative group">
+              <img 
+                src={vehicle.image} 
+                alt={vehicle.name} 
+                class="w-full h-full object-contain p-8 group-hover:scale-105 transition-transform duration-500"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
+                 <span class="text-gold text-lg font-bold">{vehicle.name}</span>
+              </div>
+            </div>
+
+            <!-- Content Side -->
+            <div class="w-full md:w-1/2 p-6 md:p-12">
+              <div class="flex items-center gap-4 mb-4">
+                <span class="px-3 py-1 rounded-full bg-gold/10 text-gold text-sm font-bold uppercase tracking-wider">
+                  {vehicle.type}
+                </span>
+                {vehicle.type === 'suv' && (
+                  <span class="px-3 py-1 rounded-full bg-emerald-900/30 text-emerald-400 text-sm font-bold uppercase tracking-wider">
+                    VIP Choice
+                  </span>
+                )}
+              </div>
+
+              <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+                {vehicle.name}
+              </h2>
+
+              <div class="grid grid-cols-2 gap-6 mb-8">
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                   <div class="text-gray-400 text-sm mb-1">Passengers</div>
+                   <div class="text-xl font-bold text-white flex items-center gap-2">
+                     <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+                     Up to {vehicle.capacity_pax}
+                   </div>
+                </div>
+                <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                   <div class="text-gray-400 text-sm mb-1">Luggage</div>
+                   <div class="text-xl font-bold text-white flex items-center gap-2">
+                     <svg class="w-5 h-5 text-gold" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 00-1-1H6zm1 2h6V3H7v1zm1 3a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"></path></svg>
+                     {vehicle.capacity_luggage} Bags
+                   </div>
+                </div>
+              </div>
+
+              <div class="mb-8">
+                <h3 class="text-lg font-bold text-white mb-3">Key Features</h3>
+                <ul class="grid sm:grid-cols-2 gap-y-2 gap-x-4">
+                  {vehicle.features.map(feature => (
+                    <li class="flex items-center gap-2 text-gray-300 text-sm">
+                      <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="flex flex-wrap gap-4">
+                <a 
+                  href={`https://wa.me/13073464572?text=I am interested in booking the ${vehicle.name}`}
+                  class="btn btn-primary bg-gold text-black px-6 py-3 rounded-lg font-bold hover:bg-white transition-colors"
+                >
+                  Book This Vehicle
+                </a>
+                <a 
+                  href="/#booking"
+                  class="px-6 py-3 rounded-lg font-bold text-white border border-white/20 hover:bg-white/10 transition-colors"
+                >
+                  Quick Quote
+                </a>
+              </div>
+
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="py-20 bg-black border-t border-white/10">
+     <div class="container text-center">
+        <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Ready to Book Your Ride?</h2>
+        <p class="text-gray-400 mb-8 max-w-2xl mx-auto">
+          Choose the vehicle that suits your needs and let us handle the rest. We ensure a smooth and spiritual journey for you and your family.
+        </p>
+        <div class="flex flex-col items-center gap-4">
+            <a href="https://wa.me/13073464572" class="btn btn-primary bg-gold text-black px-8 py-4 rounded-full font-bold hover:bg-white transition-colors flex items-center gap-2">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.592 2.654-.696c1.005.54 1.932.884 2.809.884 3.185 0 5.771-2.586 5.771-5.767 0-3.18-2.587-5.766-5.774-5.766zm.92 8.875c-.385.195-2.27.185-2.553.185-.28 0-.57-.042-.71-.24-.135-.192-.54-1.206-.54-1.206s-.284-.654.14-1.077c.425-.423 1.135.096 1.135.096s.14.192.57.192c.43 0 2.22-.96 2.22-.96s.284-.192.568-.097c.28.096.7.385.7.385s.28.192.28 1.154c0 .963-.56 1.39-1.39 1.57zM12 2C6.48 2 2 6.48 2 12c0 1.84.54 3.55 1.47 5.01L2 22l4.99-1.47C8.45 21.46 10.16 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"></path></svg>
+                Book via WhatsApp
+            </a>
+            <p class="text-sm text-center text-gray-500">Instant confirmation • No booking fees</p>
+        </div>
+     </div>
+  </section>
+
+</Layout>

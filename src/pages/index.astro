@@ -1,16 +1,370 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import { ShortBookingForm } from "../components/ShortBookingForm";
+import TrustBox from "../components/TrustBox.astro"; // Assuming we want testimonials
+import {
+  routes,
+  vehicles,
+  locations,
+  countryPages,
+} from "../data/knowledge-graph";
 
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "TaxiService",
+  name: "Umrah Taxi Saudi Arabia",
+  image: "https://umrahtaxi.site/images/hero.png",
+  description:
+    "Premium and reliable Umrah taxi service. Transfers from Jeddah Airport to Makkah, Madinah, and Ziyarat tours.",
+  areaServed: "Saudi Arabia",
+  priceRange: "$$",
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  title="Umrah Taxi | #1 Jeddah to Makkah & Madinah Transport"
+  schema={schema}
+>
+  <!-- Hero Section -->
+  <section
+    class="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
+  >
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src="/images/hero.png"
+        alt="Luxury Umrah Taxi with Clock Tower view"
+        class="w-full h-full object-cover opacity-60"
+      />
+      <!-- Dark Overlay -->
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black"
+      >
+      </div>
+    </div>
+
+    <div
+      class="container relative z-10 grid md:grid-cols-2 gap-12 items-center py-20"
+    >
+      <!-- Text Content -->
+      <div class="text-center md:text-left space-y-6 animate-fade-in">
+        <div
+          class="inline-block px-4 py-1 border border-gold/30 rounded-full bg-black/40 backdrop-blur-sm mb-4"
+        >
+          <span class="text-gold text-sm font-semibold tracking-wider uppercase"
+            >Official Licensed Chauffeur</span
+          >
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-bold leading-tight text-white">
+          VIP Chauffeur & <span class="text-gold">Umrah Taxi</span><br />
+          Service
+        </h1>
+
+        <p class="text-xl text-gray-300 max-w-lg mx-auto md:mx-0">
+          Rated 5/5 by 3000+ happy pilgrims. Premium transport across <span
+            class="text-white font-semibold"
+            >Jeddah, Makkah, Madinah & Taif</span
+          >. Specialized for International Travelers.
+          <span class="block mt-2 text-white font-semibold"
+            >Best Price Guaranteed.</span
+          >
+        </p>
+
+        <div class="flex flex-wrap gap-4 justify-center md:justify-start pt-4">
+          <div class="flex items-center gap-2 text-sm text-gray-400">
+            <span class="w-2 h-2 rounded-full bg-emerald"></span> Nusuk Registered
+          </div>
+          <div class="flex items-center gap-2 text-sm text-gray-400">
+            <span class="w-2 h-2 rounded-full bg-emerald"></span> No Waiting Time
+          </div>
+          <div class="flex items-center gap-2 text-sm text-gray-400">
+            <span class="w-2 h-2 rounded-full bg-emerald"></span> Pay After Ride
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Widget -->
+      <div class="w-full animate-fade-in" style="animation-delay: 0.2s">
+        <ShortBookingForm
+          client:load
+          locations={locations}
+          vehicles={vehicles}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES / WHY CHOOSE US -->
+  <section class="py-20 bg-gray-900 border-t border-white/10">
+    <div class="container">
+       <div class="text-center mb-16 max-w-3xl mx-auto">
+          <h2 class="text-sm font-bold text-gold uppercase tracking-widest mb-2">Why Choose Us</h2>
+          <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">Your Spiritual Journey, Our Priority</h3>
+          <p class="text-gray-400">We don't just provide a ride; we provide peace of mind so you can focus on your Ibadah.</p>
+       </div>
+
+       <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-black/40 p-8 rounded-2xl border border-white/5 hover:border-gold/30 transition-all text-center">
+             <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-6 text-gold">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+             </div>
+             <h4 class="text-xl font-bold text-white mb-3">Punctual Service</h4>
+             <p class="text-gray-400 text-sm">We track your flight in real-time. Your driver will be waiting for you at the arrival hall, regardless of delays.</p>
+          </div>
+
+          <div class="bg-black/40 p-8 rounded-2xl border border-white/5 hover:border-gold/30 transition-all text-center">
+             <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-6 text-gold">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+             </div>
+             <h4 class="text-xl font-bold text-white mb-3">Safe & Verified</h4>
+             <p class="text-gray-400 text-sm">All our chauffeurs are officially licensed, vetted, and trained to respect the sanctity of your pilgrimage.</p>
+          </div>
+
+          <div class="bg-black/40 p-8 rounded-2xl border border-white/5 hover:border-gold/30 transition-all text-center">
+             <div class="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center mx-auto mb-6 text-gold">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+             </div>
+             <h4 class="text-xl font-bold text-white mb-3">Transparent Pricing</h4>
+             <p class="text-gray-400 text-sm">No hidden fees, no haggling. The price we quote is the price you pay. Clean cars and professional service at the best rates.</p>
+          </div>
+       </div>
+    </div>
+  </section>
+
+  <!-- SERVICES OVERVIEW -->
+  <section class="py-20 bg-black">
+      <div class="container">
+          <div class="flex flex-col md:flex-row justify-between items-end mb-12">
+             <div class="max-w-2xl">
+                 <h2 class="text-sm font-bold text-gold uppercase tracking-widest mb-2">Our Services</h2>
+                 <h3 class="text-3xl md:text-4xl font-bold text-white">Complete Umrah Transport Solutions</h3>
+             </div>
+             <a href="/sitemap" class="hidden md:inline-flex items-center gap-2 text-gold font-bold hover:underline">
+                 View All Services <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+             </a>
+          </div>
+
+          <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <!-- Service 1: Airport Transfers -->
+              <div class="group relative overflow-hidden rounded-2xl aspect-[4/5]">
+                  <img src="/images/hero.png" alt="Jeddah Airport Transfer" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90"></div>
+                  <div class="absolute bottom-0 left-0 p-8">
+                      <h4 class="text-2xl font-bold text-white mb-2">Airport Transfers</h4>
+                      <p class="text-gray-300 text-sm mb-4 line-clamp-2">Reliable pickups from JED & MED airports. Meet & greet service included.</p>
+                      <a href="/jeddah-airport-to-makkah-taxi" class="inline-flex items-center gap-2 text-gold font-bold text-sm">Book Now <span class="text-lg">→</span></a>
+                  </div>
+              </div>
+
+              <!-- Service 2: Intercity -->
+              <div class="group relative overflow-hidden rounded-2xl aspect-[4/5]">
+                  <img src="/images/hero.png" alt="Makkah to Madinah Taxi" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90"></div>
+                  <div class="absolute bottom-0 left-0 p-8">
+                      <h4 class="text-2xl font-bold text-white mb-2">Makkah ⇄ Madinah</h4>
+                      <p class="text-gray-300 text-sm mb-4 line-clamp-2">Comfortable intercity transfers via Haramain route. Luxury sedans & SUVs.</p>
+                      <a href="/makkah-to-madinah-taxi" class="inline-flex items-center gap-2 text-gold font-bold text-sm">Book Now <span class="text-lg">→</span></a>
+                  </div>
+              </div>
+
+              <!-- Service 3: Ziyarat -->
+              <div class="group relative overflow-hidden rounded-2xl aspect-[4/5]">
+                  <img src="/images/hero.png" alt="Ziyarat Tours" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90"></div>
+                  <div class="absolute bottom-0 left-0 p-8">
+                      <h4 class="text-2xl font-bold text-white mb-2">Ziyarat Tours</h4>
+                      <p class="text-gray-300 text-sm mb-4 line-clamp-2">Visit holy sites in Makkah & Madinah with knowledgeable drivers.</p>
+                      <a href="/ziyarat/makkah-ziyarat-tour" class="inline-flex items-center gap-2 text-gold font-bold text-sm">View Tours <span class="text-lg">→</span></a>
+                  </div>
+              </div>
+
+               <!-- Service 4: VIP -->
+               <div class="group relative overflow-hidden rounded-2xl aspect-[4/5]">
+                  <img src="/images/hero.png" alt="VIP Chauffeur" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-90"></div>
+                  <div class="absolute bottom-0 left-0 p-8">
+                      <h4 class="text-2xl font-bold text-white mb-2">VIP Services</h4>
+                      <p class="text-gray-300 text-sm mb-4 line-clamp-2">Premium GMC Yukon & Staria vans for VIP families and groups.</p>
+                      <a href="/fleet" class="inline-flex items-center gap-2 text-gold font-bold text-sm">View Fleet <span class="text-lg">→</span></a>
+                  </div>
+              </div>
+          </div>
+
+          <div class="mt-8 text-center md:hidden">
+              <a href="/sitemap" class="inline-flex items-center gap-2 text-gold font-bold">View All Services →</a>
+          </div>
+      </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="py-20 bg-gray-900 border-t border-white/5">
+     <div class="container text-center">
+         <h2 class="text-sm font-bold text-gold uppercase tracking-widest mb-2">Simple Process</h2>
+         <h3 class="text-3xl md:text-4xl font-bold text-white mb-16">How It Works</h3>
+
+         <div class="grid md:grid-cols-3 gap-8 relative">
+             <div class="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-gold/30 to-transparent"></div>
+             
+             <div class="relative z-10">
+                 <div class="w-24 h-24 bg-black border border-gold/30 rounded-full flex items-center justify-center text-3xl font-bold text-gold mx-auto mb-6 shadow-lg shadow-gold/10">1</div>
+                 <h4 class="text-xl font-bold text-white mb-3">Book via WhatsApp</h4>
+                 <p class="text-gray-400 text-sm">Click the WhatsApp button or use the booking form to tell us your requirements.</p>
+             </div>
+             
+             <div class="relative z-10">
+                 <div class="w-24 h-24 bg-black border border-gold/30 rounded-full flex items-center justify-center text-3xl font-bold text-gold mx-auto mb-6 shadow-lg shadow-gold/10">2</div>
+                 <h4 class="text-xl font-bold text-white mb-3">Get Confirmation</h4>
+                 <p class="text-gray-400 text-sm">Receive instant confirmation with a fixed price and driver details. No advance required.</p>
+             </div>
+             
+             <div class="relative z-10">
+                 <div class="w-24 h-24 bg-black border border-gold/30 rounded-full flex items-center justify-center text-3xl font-bold text-gold mx-auto mb-6 shadow-lg shadow-gold/10">3</div>
+                 <h4 class="text-xl font-bold text-white mb-3">Enjoy Your Ride</h4>
+                 <p class="text-gray-400 text-sm">Your driver will meet you on time. Pay in cash after reaching your destination safely.</p>
+             </div>
+         </div>
+     </div>
+  </section>
+
+  <!-- Popular Routes Grid (Simplified) -->
+  <section class="py-20 bg-black">
+    <div class="container">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
+        Popular <span class="text-gold">Routes</span>
+      </h2>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-12">
+        {
+          routes.slice(0, 6).map((route) => (
+            <a
+              href={`/${route.slug}`}
+              class="group relative block p-6 rounded-2xl bg-gray-900 border border-gray-800 hover:border-gold transition-colors overflow-hidden"
+            >
+              <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                <!-- Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-gold"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17H2v-6l2-5h9l-1 5h-2"/><path d="m9 5 3 3"/><path d="m15 8-3-3"/></svg>
+              </div>
+
+              <h3 class="text-xl font-bold mb-2 text-white group-hover:text-gold transition-colors">
+                {locations[route.originId]?.name.split("(")[0] || "Unknown"} <span class="text-gold">➜</span>
+                {locations[route.destinationId]?.name || "Unknown"}
+              </h3>
+
+              <div class="flex items-center justify-between text-sm text-gray-500 mt-4">
+                <span class="text-gold font-bold">Get Quote</span>
+                <span>~{Math.round(route.durationMins / 60)} Hours</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+      
+      <div class="text-center">
+         <a href="/fleet" class="btn btn-primary px-8 py-3 rounded-full font-bold">View Our Full Fleet</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS (Using TrustBox Logic logic embedded or just static for landing vibe) -->
+  <section class="py-20 bg-gray-900 border-t border-white/5">
+     <div class="container">
+         <div class="text-center mb-12">
+             <h2 class="text-gold text-sm font-bold uppercase tracking-widest mb-2">Testimonials</h2>
+             <h3 class="text-3xl md:text-4xl font-bold text-white">Guest Reviews</h3>
+         </div>
+         
+         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+             <div class="bg-black/50 p-8 rounded-2xl border border-white/10 relative">
+                 <div class="text-gold text-4xl font-serif absolute top-4 right-6 opacity-30">"</div>
+                 <p class="text-gray-300 italic mb-6">"Everything was excellent. The driver was waiting for us at Jeddah airport with a name card. Very professional service."</p>
+                 <div class="flex items-center gap-4">
+                     <div class="w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center text-gold font-bold">A</div>
+                     <div>
+                         <div class="text-white font-bold text-sm">Ahmed Khan</div>
+                         <div class="text-xs text-gray-500">From UK • Oct 2023</div>
+                     </div>
+                 </div>
+             </div>
+             
+             <div class="bg-black/50 p-8 rounded-2xl border border-white/10 relative">
+                 <div class="text-gold text-4xl font-serif absolute top-4 right-6 opacity-30">"</div>
+                 <p class="text-gray-300 italic mb-6">"We booked a GMC Yukon for our family. The car was brand new and very clean. The driver helped with luggage. Highly recommended."</p>
+                 <div class="flex items-center gap-4">
+                     <div class="w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center text-gold font-bold">F</div>
+                     <div>
+                         <div class="text-white font-bold text-sm">Fatima Zahra</div>
+                         <div class="text-xs text-gray-500">From UAE • Dec 2023</div>
+                     </div>
+                 </div>
+             </div>
+
+             <div class="bg-black/50 p-8 rounded-2xl border border-white/10 relative">
+                 <div class="text-gold text-4xl font-serif absolute top-4 right-6 opacity-30">"</div>
+                 <p class="text-gray-300 italic mb-6">"Ziyarat tour in Madinah was amazing. The driver knew all the places and history. Much better than taking a bus."</p>
+                 <div class="flex items-center gap-4">
+                     <div class="w-10 h-10 bg-gold/20 rounded-full flex items-center justify-center text-gold font-bold">M</div>
+                     <div>
+                         <div class="text-white font-bold text-sm">Mohammad Ali</div>
+                         <div class="text-xs text-gray-500">From USA • Jan 2024</div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="py-20 bg-black">
+      <div class="container max-w-4xl mx-auto">
+          <div class="text-center mb-12">
+              <h2 class="text-gold text-sm font-bold uppercase tracking-widest mb-2">Common Questions</h2>
+              <h3 class="text-3xl md:text-4xl font-bold text-white">Frequently Asked Questions</h3>
+          </div>
+
+          <div class="space-y-4">
+              <details class="bg-gray-900 border border-white/10 rounded-xl group">
+                  <summary class="flex justify-between items-center p-6 cursor-pointer font-bold text-white group-hover:text-gold transition-colors">
+                      Do I need to pay in advance?
+                      <span class="transform transition-transform group-open:rotate-180">▼</span>
+                  </summary>
+                  <div class="px-6 pb-6 text-gray-400">
+                      No, you do not need to pay anything in advance. You can pay the driver in cash (SAR) after reaching your destination.
+                  </div>
+              </details>
+
+              <details class="bg-gray-900 border border-white/10 rounded-xl group">
+                  <summary class="flex justify-between items-center p-6 cursor-pointer font-bold text-white group-hover:text-gold transition-colors">
+                      What if my flight is delayed?
+                      <span class="transform transition-transform group-open:rotate-180">▼</span>
+                  </summary>
+                  <div class="px-6 pb-6 text-gray-400">
+                      We monitor all flights. Our driver will wait for you at the airport arrival terminal free of charge, even if your flight is delayed.
+                  </div>
+              </details>
+
+              <details class="bg-gray-900 border border-white/10 rounded-xl group">
+                  <summary class="flex justify-between items-center p-6 cursor-pointer font-bold text-white group-hover:text-gold transition-colors">
+                      Is the price fixed?
+                      <span class="transform transition-transform group-open:rotate-180">▼</span>
+                  </summary>
+                  <div class="px-6 pb-6 text-gray-400">
+                      Yes, the price we quote is the final price. It includes fuel, taxes, and toll charges. There are no hidden fees.
+                  </div>
+              </details>
+          </div>
+      </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24 bg-gold relative overflow-hidden">
+      <div class="container relative z-10 text-center text-black">
+          <h2 class="text-4xl md:text-5xl font-bold mb-6">Book Your Umrah Taxi Now</h2>
+          <p class="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-90 font-medium">Safe, reliable, and comfortable transportation for the Guests of Allah. Instant confirmation via WhatsApp.</p>
+          <a href="https://wa.me/13073464572" class="inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform">
+              <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.592 2.654-.696c1.005.54 1.932.884 2.809.884 3.185 0 5.771-2.586 5.771-5.767 0-3.18-2.587-5.766-5.774-5.766zm.92 8.875c-.385.195-2.27.185-2.553.185-.28 0-.57-.042-.71-.24-.135-.192-.54-1.206-.54-1.206s-.284-.654.14-1.077c.425-.423 1.135.096 1.135.096s.14.192.57.192c.43 0 2.22-.96 2.22-.96s.284-.192.568-.097c.28.096.7.385.7.385s.28.192.28 1.154c0 .963-.56 1.39-1.39 1.57zM12 2C6.48 2 2 6.48 2 12c0 1.84.54 3.55 1.47 5.01L2 22l4.99-1.47C8.45 21.46 10.16 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>
+              Book via WhatsApp
+          </a>
+      </div>
+  </section>
+</Layout>

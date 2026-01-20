@@ -1,0 +1,82 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "About Us | Umrah Taxi Saudi Arabia";
+const description =
+    "Learn about our mission to provide the most reliable, comfortable, and spiritual transportation services for Umrah and Hajj pilgrims in Saudi Arabia.";
+---
+
+<Layout title={title} description={description}>
+    <section class="relative pt-32 pb-20 bg-black overflow-hidden">
+        <div class="container relative z-10">
+            <div class="max-w-3xl mx-auto text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">
+                    About <span class="text-gold">Umrah Taxi</span>
+                </h1>
+                <p class="text-xl text-gray-300">
+                    Serving the Guests of Allah with Honor, Dignity, and
+                    Excellence.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center mb-20">
+                <div
+                    class="bg-gray-900/50 p-8 rounded-2xl border border-white/5"
+                >
+                    <h2 class="text-2xl font-bold text-gold mb-4">
+                        Our Mission
+                    </h2>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        We understand that your journey is not just travel; it
+                        is a spiritual pilgrimage. Our mission is to remove all
+                        worldly hassles of transportation so you can focus
+                        entirely on your Ibadah. From the moment you land at
+                        Jeddah or Madinah airport, we ensure a smooth, safe, and
+                        respectful transfer to your destination.
+                    </p>
+                    <ul class="space-y-3 text-gray-300">
+                        <li class="flex items-center gap-3">
+                            <span class="text-gold">✔</span> Official Licensed Service
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-gold">✔</span> 24/7 Flight Tracking
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span class="text-gold">✔</span> Multilingual Drivers
+                        </li>
+                    </ul>
+                </div>
+                <div
+                    class="h-full min-h-[300px] rounded-2xl overflow-hidden relative"
+                >
+                    <img
+                        src="/images/hero.png"
+                        alt="Umrah Taxi Mission"
+                        class="w-full h-full object-cover absolute inset-0"
+                    />
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div
+                    class="bg-black/40 p-6 rounded-xl border border-white/10 text-center"
+                >
+                    <div class="text-4xl font-bold text-gold mb-2">5+</div>
+                    <p class="text-gray-400">Years of Service</p>
+                </div>
+                <div
+                    class="bg-black/40 p-6 rounded-xl border border-white/10 text-center"
+                >
+                    <div class="text-4xl font-bold text-gold mb-2">10k+</div>
+                    <p class="text-gray-400">Happy Pilgrims</p>
+                </div>
+                <div
+                    class="bg-black/40 p-6 rounded-xl border border-white/10 text-center"
+                >
+                    <div class="text-4xl font-bold text-gold mb-2">100%</div>
+                    <p class="text-gray-400">Satisfaction Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>

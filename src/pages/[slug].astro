@@ -1,0 +1,256 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { ShortBookingForm } from "../components/ShortBookingForm";
+import TrustBox from "../components/TrustBox.astro";
+import { routes, locations, vehicles } from "../data/knowledge-graph";
+import type { Route } from "../data/types";
+// import relatedLinksData from "../data/related-links.json";
+
+export function getStaticPaths() {
+  return routes.map((route) => ({
+    params: { slug: route.slug },
+    props: { route },
+  }));
+}
+
+interface Props {
+  route: Route;
+}
+
+const { route } = Astro.props;
+
+// Helper to get related links safely
+// const relatedLinks = (relatedLinksData as any)[route.slug] || [];
+const relatedLinks: any[] = [];
+
+// Safe access to locations
+const fromLocation = locations[route.originId] || {
+  name: "Unknown",
+  city: "Unknown",
+};
+const toLocation = locations[route.destinationId] || {
+  name: "Unknown",
+  city: "Unknown",
+};
+
+const from = fromLocation.name;
+const to = toLocation.name;
+const distance = `${route.distanceKm} km`;
+const time = `${Math.round(route.durationMins / 60)} hours`;
+const mainKeyword = route.mainKeyword || `${from} to ${fromLocation.city} Taxi`; // Fallback logic fix might be needed, but sticking to original logic: `${from} to ${to} Taxi`
+// Wait, original was `${from} to ${to} Taxi`
+// Re-reading original logic:
+// const mainKeyword = route.mainKeyword || `${from} to ${to} Taxi`;
+// Yes.
+
+const title = `${mainKeyword} | Umrah Taxi`;
+const description = `Travel from ${from} to ${to} in comfort with Umrah Taxi. This route covers ${distance} and takes approximately ${time}. Best rates guaranteed.`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Product",
+  name: mainKeyword,
+  description: description,
+
+  provider: {
+    "@type": "TaxiService",
+    name: "Umrah Taxi Saudi Arabia",
+  },
+};
+---
+
+<Layout title={title} description={description} schema={schema}>
+  <section class="relative bg-black pt-32 pb-20 overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-40">
+      <img
+        src="/images/hero.png"
+        class="w-full h-full object-cover"
+        alt="Route Background"
+      />
+    </div>
+
+    <div
+      class="container relative z-10 grid md:grid-cols-2 gap-12 items-center"
+    >
+      <div class="animate-fade-in">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white">
+          {mainKeyword}
+        </h1>
+
+        <p class="text-xl text-gray-300 mb-8">
+          Travel from <strong>{from}</strong> to <strong>{to}</strong> in comfort
+          with Umrah Taxi. This route covers {distance} and takes approximately {
+            time
+          }, making it ideal for Umrah and Hajj pilgrims.
+        </p>
+      </div>
+
+      <div class="animate-fade-in" style="animation-delay: 0.2s">
+        <ShortBookingForm
+          locations={locations}
+          vehicles={vehicles}
+          client:load
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section bg-black text-white">
+    <div class="container max-w-4xl mx-auto space-y-12">
+      <!-- Why Choose Section -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-gold">
+          Why choose Umrah Taxi for {from} to {to}?
+        </h2>
+        <p class="text-gray-300 leading-relaxed">
+          Umrah Taxi provides safe, private, and air-conditioned vehicles for
+          pilgrims traveling between
+          {from} and {to}. Our drivers are trained to support Ihram travelers
+          and families.
+        </p>
+      </div>
+
+      <!-- Available Vehicles -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-gold">Available Vehicles</h2>
+        <ul class="grid md:grid-cols-2 gap-3">
+          {
+            route.availableVehicles?.map((v) => (
+              <li class="flex items-center gap-2 text-gray-300">
+                <span class="text-emerald">✓</span> {v} Taxi Service
+              </li>
+            )) || (
+              <li class="text-gray-400">
+                Standard and Luxury Vehicles Available
+              </li>
+            )
+          }
+        </ul>
+      </div>
+
+      <!-- Hotels -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-gold">
+          Hotels We Serve in {toLocation.city}
+        </h2>
+        <ul class="grid md:grid-cols-2 gap-3">
+          {
+            route.nearbyHotels?.map((h) => (
+              <li class="flex items-center gap-2 text-gray-300">
+                <span class="text-emerald">✓</span> {fromLocation.city} to {h}{" "}
+                Taxi
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Ziyarat -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-gold">
+          Ziyarat Stops on This Route
+        </h2>
+        <ul class="grid md:grid-cols-2 gap-3">
+          {
+            route.ziyaratStops?.map((z) => (
+              <li class="flex items-center gap-2 text-gray-300">
+                <span class="text-emerald">✓</span> {z} Ziyarat Transfer
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- International Pilgrims -->
+      <div>
+        <h2 class="text-3xl font-bold mb-4 text-gold">
+          Umrah Taxi for International Pilgrims
+        </h2>
+        <p class="text-gray-300 mb-4">
+          We offer special Umrah taxi services for pilgrims from:
+        </p>
+        <ul class="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {
+            route.pilgrimOrigins?.map((p) => (
+              <li class="bg-gray-900 border border-white/10 p-2 rounded text-center text-sm text-white">
+                {p} Umrah Taxi
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- FAQs -->
+      <div class="pt-12 border-t border-white/10">
+        <h2 class="text-3xl font-bold mb-8 text-gold text-center">
+          Frequently Asked Questions
+        </h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-2">
+              How long is the journey?
+            </h3>
+            <p class="text-gray-400">
+              The journey takes approximately {time}, depending on traffic and
+              potential stops. Our drivers prioritize safety and punctuality.
+            </p>
+          </div>
+          <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-2">
+              Is the price fixed?
+            </h3>
+            <p class="text-gray-400">
+              We offer competitive rates for all our routes. Please contact us
+              via WhatsApp for a custom quote based on your vehicle preference.
+            </p>
+          </div>
+          <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-2">
+              Can we stop for Ziyarat?
+            </h3>
+            <p class="text-gray-400">
+              Yes, if you wish to visit Ziyarat spots like {
+                route.ziyaratStops?.[0] || "nearby mosques"
+              } along the way, please inform us when booking or tell the driver.
+            </p>
+          </div>
+          <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+            <h3 class="text-xl font-bold text-white mb-2">
+              Is this a private taxi?
+            </h3>
+            <p class="text-gray-400">
+              Yes, you get the entire vehicle for you and your family. It is a
+              VIP private transfer service.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Related Links -->
+      {
+        relatedLinks.length > 0 && (
+          <div class="pt-12 border-t border-white/10">
+            <h3 class="text-xl font-bold mb-4 text-gold">
+              Related Umrah Taxi Services
+            </h3>
+            <ul class="flex flex-wrap gap-4 text-sm">
+              {relatedLinks.map((link: any) => (
+                <li>
+                  <a
+                    href={link.url}
+                    class="text-gray-400 hover:text-gold transition-colors border-b border-transparent hover:border-gold"
+                  >
+                    {link.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+
+      <!-- AI Reviews / Trust Signal -->
+      <TrustBox entitySlug={route.slug} />
+    </div>
+  </section>
+</Layout>

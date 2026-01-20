@@ -1,0 +1,62 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const title = "Terms of Service | Umrah Taxi Saudi Arabia";
+const description =
+    "Read our Terms of Service regarding booking cancellations, luggage policies, and passenger conduct.";
+---
+
+<Layout title={title} description={description}>
+    <section class="pt-32 pb-20 bg-black min-h-screen">
+        <div class="container max-w-4xl mx-auto">
+            <h1 class="text-4xl font-bold text-white mb-8">Terms of Service</h1>
+
+            <div class="prose prose-invert max-w-none text-gray-300">
+                <p>Last Updated: {new Date().toLocaleDateString()}</p>
+
+                <h3>1. Booking Confirmation</h3>
+                <p>
+                    A booking is considered confirmed only after you receive a
+                    confirmation message via WhatsApp or Email from our official
+                    channels.
+                </p>
+
+                <h3>2. Cancellations and Refunds</h3>
+                <p>
+                    You may cancel your booking up to 24 hours before the
+                    scheduled pickup time for a full refund. Cancellations made
+                    within 24 hours may be subject to a cancellation fee.
+                </p>
+
+                <h3>3. Flight Delays</h3>
+                <p>
+                    We monitor flights for delays. However, if your flight
+                    number changes or is cancelled, you must inform us
+                    immediately to reschedule your pickup.
+                </p>
+
+                <h3>4. Luggage Policy</h3>
+                <p>
+                    Passengers are responsible for ensuring their luggage fits
+                    within the capacity of the booked vehicle. If you have
+                    excess luggage, please book a larger vehicle (e.g., GMC or
+                    Hiace) to avoid inconvenience.
+                </p>
+
+                <h3>5. Passenger Conduct</h3>
+                <p>
+                    We reserve the right to refuse service to anyone who poses a
+                    threat to the safety of our drivers or vehicles. Smoking is
+                    strictly prohibited in all our vehicles.
+                </p>
+
+                <h3>6. Changes to Terms</h3>
+                <p>
+                    We reserve the right to modify these terms at any time.
+                    Continued use of our service constitutes acceptance of the
+                    new terms.
+                </p>
+            </div>
+        </div>
+    </section>
+</Layout>

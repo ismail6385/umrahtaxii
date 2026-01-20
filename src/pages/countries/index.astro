@@ -1,0 +1,117 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { countryPages } from "../../data/knowledge-graph";
+---
+
+<Layout
+    title="International Umrah Taxi Services | Global Reliability"
+    description="We provide dedicated VIP Umrah taxi services for pilgrims from over 40 countries including Pakistan, India, UK, USA, Malaysia, and more."
+>
+    <section class="section bg-black min-h-screen">
+        <div class="container relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6 text-white">
+                    International <span class="text-gold">Pilgrim Services</span
+                    >
+                </h1>
+                <p class="text-xl text-gray-300">
+                    Trusted by pilgrims from around the world. We offer tailored
+                    transport packages with language support and currency
+                    convenience.
+                </p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="max-w-md mx-auto mb-12">
+                <input
+                    type="text"
+                    id="countrySearch"
+                    placeholder="Search your country..."
+                    class="w-full bg-gray-900 border border-white/20 rounded-full px-6 py-3 text-white focus:outline-none focus:border-gold transition-colors"
+                />
+            </div>
+
+            <div
+                id="countriesGrid"
+                class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            >
+                {
+                    countryPages.map((page) => (
+                        <a
+                            href={`/countries/${page.slug}`}
+                            data-country={page.country.toLowerCase()}
+                            class="country-card group block bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-gold transition-colors"
+                        >
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-3xl">
+                                    {/* Flag emoji could go here if mapped, or just name */}
+                                    🌍
+                                </span>
+                                <span class="text-gold text-sm font-bold">
+                                    {page.currency}
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2 group-hover:text-gold transition-colors">
+                                {page.country}
+                            </h3>
+                            <p class="text-sm text-gray-400 line-clamp-2">
+                                {page.description}
+                            </p>
+                            <div class="mt-4 pt-4 border-t border-gray-800 flex items-center text-sm text-gray-500">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    class="h-4 w-4 mr-2"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                >
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+                                    />
+                                </svg>
+                                {page.language}
+                            </div>
+                        </a>
+                    ))
+                }
+            </div>
+
+            <p id="noResults" class="hidden text-center text-gray-500 mt-8">
+                No countries found matching your search.
+            </p>
+        </div>
+    </section>
+
+    <script>
+        const searchInput = document.getElementById(
+            "countrySearch",
+        ) as HTMLInputElement;
+        const cards = document.querySelectorAll(".country-card");
+        const noResults = document.getElementById("noResults");
+
+        if (searchInput) {
+            searchInput.addEventListener("input", (e) => {
+                const term = (e.target as HTMLInputElement).value.toLowerCase();
+                let visibleCount = 0;
+
+                cards.forEach((card) => {
+                    const country = (card as HTMLElement).dataset.country || "";
+                    if (country.includes(term)) {
+                        (card as HTMLElement).style.display = "block";
+                        visibleCount++;
+                    } else {
+                        (card as HTMLElement).style.display = "none";
+                    }
+                });
+
+                if (noResults) {
+                    noResults.style.display =
+                        visibleCount === 0 ? "block" : "none";
+                }
+            });
+        }
+    </script>
+</Layout>

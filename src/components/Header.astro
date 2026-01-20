@@ -1,0 +1,145 @@
+---
+
+---
+
+<header
+  class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-white/5 transition-all duration-300"
+>
+  <div
+    class="container flex items-center justify-between h-[var(--header-height)]"
+  >
+    <a href="/" class="text-2xl font-bold text-white font-heading">
+      Umrah <span class="text-gold">Taxi</span>
+    </a>
+
+    <nav class="hidden md:flex gap-8">
+      <a href="/" class="text-sm font-medium hover:text-gold transition-colors"
+        >Home</a
+      >
+      <a
+        href="/about"
+        class="text-sm font-medium hover:text-gold transition-colors"
+        >About Us</a
+      >
+      <a
+        href="/fleet"
+        class="text-sm font-medium hover:text-gold transition-colors">Fleet</a
+      >
+      <a
+        href="/sitemap"
+        class="text-sm font-medium hover:text-gold transition-colors"
+        >Services</a
+      >
+      <a
+        href="/contact"
+        class="text-sm font-medium hover:text-gold transition-colors"
+        >Contact Us</a
+      >
+    </nav>
+
+    <a
+      href="https://wa.me/13073464572"
+      class="btn btn-primary hidden md:inline-flex text-sm py-2 px-4 shadow-none hover:shadow-gold rounded-full"
+    >
+      Book via WhatsApp
+    </a>
+
+    <!-- Mobile Menu Button -->
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden text-white p-2"
+      aria-label="Open Menu"
+    >
+      <svg
+        class="w-6 h-6"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 bg-black/95 z-50 transform translate-x-full transition-transform duration-300 md:hidden flex flex-col justify-center items-center gap-8"
+  >
+    <button
+      id="close-menu-btn"
+      class="absolute top-6 right-6 text-white p-2"
+      aria-label="Close Menu"
+    >
+      <svg
+        class="w-8 h-8"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <a
+      href="/"
+      class="text-2xl font-bold text-white hover:text-gold transition-colors mobile-link"
+      >Home</a
+    >
+    <a
+      href="/about"
+      class="text-2xl font-bold text-white hover:text-gold transition-colors mobile-link"
+      >About Us</a
+    >
+    <a
+      href="/fleet"
+      class="text-2xl font-bold text-white hover:text-gold transition-colors mobile-link"
+      >Fleet</a
+    >
+    <a
+      href="/sitemap"
+      class="text-2xl font-bold text-white hover:text-gold transition-colors mobile-link"
+      >Services</a
+    >
+    <a
+      href="/contact"
+      class="text-2xl font-bold text-white hover:text-gold transition-colors mobile-link"
+      >Contact Us</a
+    >
+
+    <a
+      href="https://wa.me/13073464572"
+      class="btn btn-primary px-8 py-3 rounded-full text-lg mt-4"
+    >
+      Book via WhatsApp
+    </a>
+  </div>
+</header>
+
+<script>
+  const menuBtn = document.getElementById("mobile-menu-btn");
+  const closeBtn = document.getElementById("close-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  const links = document.querySelectorAll(".mobile-link");
+
+  function toggleMenu() {
+    menu?.classList.toggle("translate-x-full");
+    document.body.classList.toggle("overflow-hidden"); // Prevent scrolling when menu is open
+  }
+
+  menuBtn?.addEventListener("click", toggleMenu);
+  closeBtn?.addEventListener("click", toggleMenu);
+
+  // Close menu when a link is clicked
+  links.forEach((link) => {
+    link.addEventListener("click", toggleMenu);
+  });
+</script>

@@ -1,0 +1,46 @@
+[
+  {
+    "source": "WhatsApp",
+    "user": "Ahmed Al-Sayed",
+    "text": "The driver waited for us at Jeddah Airport even though flight was delayed. Smooth ride to Hilton Makkah.",
+    "date": "2024-01-14",
+    "tags": [
+      "jeddah-airport-to-makkah-taxi",
+      "hilton-makkah"
+    ],
+    "sentiment": "positive",
+    "rating": 5
+  },
+  {
+    "source": "Google Maps",
+    "user": "Sarah Jenkins",
+    "text": "Excellent service for our family from UK. Ziyarat in Madinah was very informative.",
+    "date": "2024-01-13",
+    "tags": [
+      "madinah-ziyarat-tour",
+      "uk-umrah-taxi"
+    ],
+    "sentiment": "positive",
+    "rating": 5
+  },
+  {
+    "source": "Email",
+    "user": "Mohammad Raza",
+    "text": "Best price for Makkah to Madinah taxi. Car was clean and AC was strong.",
+    "date": "2024-01-12",
+    "tags": [
+      "makkah-to-madinah-taxi"
+    ],
+    "sentiment": "positive",
+    "rating": 5
+  },
+  {
+    "source": "Trustpilot",
+    "user": "Fatima K.",
+    "text": "Very safe for ladies traveling alone. Highly recommend for Ziyarat.",
+    "date": "2024-01-10",
+    "tags": [],
+    "sentiment": "positive",
+    "rating": 5
+  }
+]
