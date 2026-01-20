@@ -1,0 +1,22 @@
+
+> ismail@0.0.1 build
+> astro build
+
+[sentry-vite-plugin] Info: Sending telemetry data on issues and performance to Sentry. To disable telemetry, set `options.telemetry` to `false`.
+12:23:35 [types] Generated 43ms
+12:23:35 [build] output: "hybrid"
+12:23:35 [build] directory: D:\Taxi KSA\ismail\dist\
+12:23:35 [build] Collecting build info...
+12:23:35 [build] ✓ Completed in 119ms.
+[NoAdapterInstalled] Cannot use `output: 'server'` or `output: 'hybrid'` without an adapter. Please install and configure the appropriate server adapter for your final deployment.
+  Hint:
+    See https://docs.astro.build/en/guides/server-side-rendering/ for more information.
+  Error reference:
+    https://docs.astro.build/en/reference/errors/no-adapter-installed/
+  Location:
+    D:\Taxi KSA\ismail\node_modules\astro\dist\core\build\static-build.js:42:11
+  Stack trace:
+    at viteBuild (file:///D:/Taxi%20KSA/ismail/node_modules/astro/dist/core/build/static-build.js:42:11)
+    at async AstroBuilder.run (file:///D:/Taxi%20KSA/ismail/node_modules/astro/dist/core/build/index.js:182:7)
+    at async build (file:///D:/Taxi%20KSA/ismail/node_modules/astro/dist/cli/build/index.js:24:3)
+    at async cli (file:///D:/Taxi%20KSA/ismail/node_modules/astro/dist/cli/index.js:175:5)

@@ -7,6 +7,8 @@ import preact from '@astrojs/preact';
 import sentry from '@sentry/astro';
 import spotlightjs from '@spotlightjs/astro';
 
+import { loadEnv } from 'vite';
+import vercel from '@astrojs/vercel/serverless';
 import { storyblok } from '@storyblok/astro';
 
 import sitemap from '@astrojs/sitemap';
@@ -16,6 +18,7 @@ export default defineConfig({
   site: 'https://umrahtaxi.site',
   output: 'hybrid',
   trailingSlash: 'never',
+  adapter: vercel(),
   integrations: [preact(), sentry(), spotlightjs(), storyblok({
     accessToken: process.env.STORYBLOK_TOKEN || '',
     components: {
