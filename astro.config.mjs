@@ -11,7 +11,7 @@ import { loadEnv } from 'vite';
 import vercel from '@astrojs/vercel/serverless';
 import { storyblok } from '@storyblok/astro';
 
-import sitemap from '@astrojs/sitemap';
+// import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
@@ -27,7 +27,7 @@ export default defineConfig({
     apiOptions: {
       region: "eu", // default
     }
-  }), sitemap()],
+  })],
 
   vite: {
     // @ts-ignore
