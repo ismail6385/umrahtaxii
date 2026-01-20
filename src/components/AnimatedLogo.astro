@@ -1,0 +1,146 @@
+---
+interface Props {
+    class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<a
+    href="/"
+    class:list={[
+        "flex items-center gap-3 no-underline group logo-container",
+        className,
+    ]}
+    aria-label="Umrah Taxi Home"
+>
+    <div class="relative w-14 h-14 flex-shrink-0 overflow-visible">
+        <svg
+            viewBox="0 0 100 100"
+            class="w-full h-full overflow-visible drop-shadow-lg"
+        >
+            <defs>
+                <linearGradient
+                    id="goldGradient"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="100%"
+                >
+                    <stop offset="0%" stop-color="#D4AF37"></stop>
+                    <stop offset="100%" stop-color="#F4E5B0"></stop>
+                </linearGradient>
+            </defs>
+
+            <!-- Moon -->
+            <path
+                d="M75,50 C75,70 60,85 40,85 C25,85 15,75 10,60 C10,40 25,20 45,20 C50,20 55,22 60,25 C50,25 40,35 40,50 C40,65 50,75 60,75 C70,75 75,70 75,50 Z"
+                fill="url(#goldGradient)"
+                class="moon-shape origin-center"></path>
+
+            <!-- Car -->
+            <g class="car-shape">
+                <path
+                    d="M20,65 L30,55 L65,55 L75,65 L80,65 L80,75 L20,75 Z"
+                    fill="#10B981"></path>
+                <circle cx="35" cy="75" r="7" fill="#059669"></circle>
+                <circle cx="65" cy="75" r="7" fill="#059669"></circle>
+                <!-- Window cutouts -->
+                <path
+                    d="M35,63 L45,58 L60,58 L68,63 Z"
+                    fill="#064E3B"
+                    opacity="0.5"></path>
+            </g>
+        </svg>
+    </div>
+
+    <div class="flex flex-col">
+        <span
+            class="text-2xl font-bold font-heading leading-none tracking-tight text-shimmer"
+        >
+            Umrah
+        </span>
+        <span
+            class="text-sm font-semibold font-sans leading-none tracking-[0.2em] text-shimmer-gold uppercase mt-0.5"
+        >
+            Taxi
+        </span>
+    </div>
+</a>
+
+<style>
+    /* Moon Animation */
+    .moon-shape {
+        animation: floatMoon 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatMoon {
+        0% {
+            transform: translateY(0) rotate(0deg);
+        }
+        100% {
+            transform: translateY(-3px) rotate(2deg);
+        }
+    }
+
+    /* Car Animation */
+    .car-shape {
+        animation: driveIn 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+
+    @keyframes driveIn {
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    /* Hover: Car zooms slightly */
+    .group:hover .car-shape {
+        transform: translateX(5px);
+        transition: transform 0.3s ease-out;
+    }
+
+    /* Text Shimmer Effect */
+    .text-shimmer {
+        background: linear-gradient(
+            to right,
+            #ffffff 0%,
+            #ffffff 40%,
+            #d4af37 50%,
+            #ffffff 60%,
+            #ffffff 100%
+        );
+        background-size: 200% auto;
+        color: #fff;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 5s linear infinite;
+    }
+
+    .text-shimmer-gold {
+        background: linear-gradient(
+            to right,
+            #d4af37 0%,
+            #d4af37 40%,
+            #ffffff 50%,
+            #d4af37 60%,
+            #d4af37 100%
+        );
+        background-size: 200% auto;
+        color: #d4af37;
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 5s linear infinite;
+        animation-delay: 2.5s;
+    }
+
+    @keyframes shine {
+        to {
+            background-position: 200% center;
+        }
+    }
+</style>

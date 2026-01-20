@@ -1,5 +1,5 @@
 ---
-
+import AnimatedLogo from "./AnimatedLogo.astro";
 ---
 
 <header
@@ -8,9 +8,7 @@
   <div
     class="container flex items-center justify-between h-[var(--header-height)]"
   >
-    <a href="/" class="flex items-center gap-2">
-      <img src="/images/logo.png" alt="Umrah Taxi" class="h-12 w-auto" />
-    </a>
+    <AnimatedLogo />
 
     <nav class="hidden md:flex gap-8">
       <a href="/" class="text-sm font-medium hover:text-gold transition-colors"
