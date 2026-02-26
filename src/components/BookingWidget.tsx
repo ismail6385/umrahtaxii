@@ -69,9 +69,9 @@ export const BookingWidget = ({ locations, vehicles }: Props) => {
 
     return (
         <div class="booking-widget bg-glass p-6 rounded-xl shadow-gold max-w-md w-full mx-auto backdrop-blur-md border border-white/10">
-            <h3 class="text-2xl font-bold text-white mb-6 font-heading text-center">
+            <h2 class="text-2xl font-bold text-white mb-6 font-heading text-center">
                 Book Your <span class="text-gold">Umrah Ride</span>
-            </h3>
+            </h2>
 
             <form onSubmit={handleSubmit} class="space-y-4">
                 {/* Customer Info */}

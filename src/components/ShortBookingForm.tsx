@@ -37,9 +37,9 @@ Please confirm availability.`;
 
     return (
         <div class="bg-glass p-6 rounded-xl shadow-gold max-w-md w-full mx-auto backdrop-blur-md border border-white/10">
-            <h3 class="text-2xl font-bold text-white mb-2 font-heading text-center">
+            <h2 class="text-2xl font-bold text-white mb-2 font-heading text-center">
                 VIP <span class="text-gold">Transfer Booking</span>
-            </h3>
+            </h2>
             <p class="text-xs text-gray-400 text-center mb-6">
                 Serving Jeddah • Makkah • Madinah • Taif<br />
                 <span class="text-red-400">* No short distance / local rides within city</span>
