@@ -2,6 +2,8 @@ import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
 import { supabase } from '../../lib/supabase';
 
+export const prerender = false;
+
 const resend = new Resend('re_UERhEqbY_AvrhT7GTLt1rsGTVpzdzsaUg');
 
 export const POST: APIRoute = async ({ request }) => {
@@ -92,7 +94,7 @@ export const POST: APIRoute = async ({ request }) => {
         
         <p>Our team will contact you shortly via WhatsApp or phone to confirm your booking.</p>
         <p style="color: #666; font-size: 14px;">
-          For immediate assistance, contact us on WhatsApp: +966 XX XXX XXXX
+          For immediate assistance, contact us on WhatsApp: +92 308 0628195
         </p>
         
         <p>JazakAllah Khair,<br><strong>Umrah Taxi Team</strong></p>

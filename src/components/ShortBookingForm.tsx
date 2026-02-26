@@ -27,7 +27,7 @@ export const ShortBookingForm = ({ locations, vehicles }: Props) => {
 
 Please confirm availability.`;
 
-        const whatsappUrl = `https://wa.me/13073464572?text=${encodeURIComponent(message)}`;
+        const whatsappUrl = `https://wa.me/923080628195?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
     };
 

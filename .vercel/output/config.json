@@ -1,0 +1,126 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"src": "/404/",
+			"headers": {
+				"Location": "/404"
+			},
+			"status": 308
+		},
+		{
+			"src": "/about/",
+			"headers": {
+				"Location": "/about"
+			},
+			"status": 308
+		},
+		{
+			"src": "/admin/login/",
+			"headers": {
+				"Location": "/admin/login"
+			},
+			"status": 308
+		},
+		{
+			"src": "/contact/",
+			"headers": {
+				"Location": "/contact"
+			},
+			"status": 308
+		},
+		{
+			"src": "/countries/([^/]+?)/",
+			"headers": {
+				"Location": "/countries/$1"
+			},
+			"status": 308
+		},
+		{
+			"src": "/countries/",
+			"headers": {
+				"Location": "/countries"
+			},
+			"status": 308
+		},
+		{
+			"src": "/dashboard/",
+			"headers": {
+				"Location": "/dashboard"
+			},
+			"status": 308
+		},
+		{
+			"src": "/fleet/",
+			"headers": {
+				"Location": "/fleet"
+			},
+			"status": 308
+		},
+		{
+			"src": "/hotels/([^/]+?)/([^/]+?)/",
+			"headers": {
+				"Location": "/hotels/$1/$2"
+			},
+			"status": 308
+		},
+		{
+			"src": "/privacy/",
+			"headers": {
+				"Location": "/privacy"
+			},
+			"status": 308
+		},
+		{
+			"src": "/sitemap/",
+			"headers": {
+				"Location": "/sitemap"
+			},
+			"status": 308
+		},
+		{
+			"src": "/terms/",
+			"headers": {
+				"Location": "/terms"
+			},
+			"status": 308
+		},
+		{
+			"src": "/ziyarat/([^/]+?)/",
+			"headers": {
+				"Location": "/ziyarat/$1"
+			},
+			"status": 308
+		},
+		{
+			"src": "/([^/]+?)/",
+			"headers": {
+				"Location": "/$1"
+			},
+			"status": 308
+		},
+		{
+			"src": "^/_astro/(.*)$",
+			"headers": {
+				"cache-control": "public, max-age=31536000, immutable"
+			},
+			"continue": true
+		},
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "^\\/_image$",
+			"dest": "_render"
+		},
+		{
+			"src": "^\\/api\\/booking$",
+			"dest": "_render"
+		},
+		{
+			"src": "/.*",
+			"dest": "/404.html",
+			"status": 404
+		}
+	]
+}
