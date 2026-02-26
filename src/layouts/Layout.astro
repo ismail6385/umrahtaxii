@@ -17,6 +17,75 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+const baseSchema = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "LocalBusiness",
+			"@id": "https://umrahtaxi.site/#localbusiness",
+			name: "Umrah Taxi Saudi Arabia",
+			url: "https://umrahtaxi.site/",
+			logo: "https://umrahtaxi.site/images/logo.png",
+			image: "https://umrahtaxi.site/images/hero.png",
+			description:
+				"Premium Umrah Taxi service providing VIP private transfers from Jeddah Airport to Makkah, Madinah, and Ziyarat tours.",
+			telephone: "+923080628195",
+			priceRange: "$$$",
+			address: {
+				"@type": "PostalAddress",
+				addressCountry: "SA",
+				addressLocality: "Jeddah",
+			},
+			areaServed: [
+				{
+					"@type": "City",
+					name: "Makkah",
+				},
+				{
+					"@type": "City",
+					name: "Jeddah",
+				},
+				{
+					"@type": "City",
+					name: "Madinah",
+				},
+			],
+		},
+		{
+			"@type": "Service",
+			"@id": "https://umrahtaxi.site/#service",
+			serviceType: "Private VIP Airport Transfer",
+			provider: {
+				"@id": "https://umrahtaxi.site/#localbusiness",
+			},
+			areaServed: [
+				{
+					"@type": "City",
+					name: "Makkah",
+				},
+				{
+					"@type": "City",
+					name: "Jeddah",
+				},
+				{
+					"@type": "City",
+					name: "Madinah",
+				},
+			],
+		},
+	],
+};
+
+// Automatically combine page-level schema into the master NLP entity graph
+let finalSchema = baseSchema;
+if (schema) {
+	if (Array.isArray(schema)) {
+		finalSchema["@graph"].push(...schema);
+	} else {
+		finalSchema["@graph"].push(schema as any);
+	}
+}
 ---
 
 <!doctype html>
@@ -61,10 +130,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 		/>
 
 		{
-			schema && (
+			finalSchema && (
 				<script
 					type="application/ld+json"
-					set:html={JSON.stringify(schema)}
+					set:html={JSON.stringify(finalSchema)}
 				/>
 			)
 		}

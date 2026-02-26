@@ -9,16 +9,47 @@ import {
   countryPages,
 } from "../data/knowledge-graph";
 
-const schema = {
-  "@context": "https://schema.org",
-  "@type": "TaxiService",
-  name: "Umrah Taxi Saudi Arabia",
-  image: "https://umrahtaxi.site/images/hero.png",
-  description:
-    "Premium and reliable Umrah taxi service. Transfers from Jeddah Airport to Makkah, Madinah, and Ziyarat tours.",
-  areaServed: "Saudi Arabia",
-  priceRange: "$$",
-};
+const schema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "TaxiService",
+    name: "Umrah Taxi Saudi Arabia",
+    image: "https://umrahtaxi.site/images/hero.png",
+    description: "Premium and reliable Umrah taxi service. Transfers from Jeddah Airport to Makkah, Madinah, and Ziyarat tours.",
+    areaServed: "Saudi Arabia",
+    priceRange: "$$"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I need to pay in advance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, you do not need to pay anything in advance. You can pay the driver in cash (SAR) after reaching your destination."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if my flight is delayed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We monitor all flights. Our driver will wait for you at the airport arrival terminal free of charge, even if your flight is delayed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the price fixed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, the price we quote is the final price. It includes fuel, taxes, and toll charges. There are no hidden fees."
+        }
+      }
+    ]
+  }
+];
 ---
 
 <Layout
